@@ -47,3 +47,6 @@ public class Competition {
         this.deadline = deadline;
     }
 }
+
+
+
