@@ -5,7 +5,9 @@ import lk.competelk.competelk_backend.service.CompetitionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import lk.competelk.competelk_backend.dto.CreateCompetitionRequest;
 import java.util.List;
 
 @RestController
@@ -21,5 +23,9 @@ public class CompetitionController {
     @GetMapping
     public List<Competition> getAllCompetitions() {
         return competitionService.getAllCompetitions();
+    }
+    @PostMapping
+    public Competition createCompetition(@RequestBody CreateCompetitionRequest request) {
+        return competitionService.createCompetition(request);
     }
 }

@@ -3,6 +3,7 @@ package lk.competelk.competelk_backend.service;
 import lk.competelk.competelk_backend.entity.Competition;
 import lk.competelk.competelk_backend.repository.CompetitionRepository;
 import org.springframework.stereotype.Service;
+import lk.competelk.competelk_backend.dto.CreateCompetitionRequest;
 
 import java.util.List;
 
@@ -15,7 +16,18 @@ public class CompetitionService {
         this.competitionRepository = competitionRepository;
     }
 
-    public List<Competition> getAllCompetitions() { //return list(objects) of competitons
+    public List<Competition> getAllCompetitions() {
         return competitionRepository.findAll();
+    }
+
+    public Competition createCompetition(CreateCompetitionRequest request) {
+
+        Competition competition = new Competition();// We just created a new empty Competition entity object. all fields has null
+
+        competition.setTitle(request.getTitle()); //mapping from DTO to entity then save
+        competition.setDescription(request.getDescription());
+        competition.setDeadline(request.getDeadline());
+
+        return competitionRepository.save(competition);
     }
 }
