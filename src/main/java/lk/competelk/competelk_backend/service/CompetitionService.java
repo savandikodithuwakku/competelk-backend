@@ -30,8 +30,18 @@ public class CompetitionService {
 
         return competitionRepository.save(competition); //save=insert/update
     }
+
     public Competition getCompetitionById(Long id) {
         return competitionRepository.findById(id)
                 .orElseThrow(() -> new CompetitionNotFoundException(id));
     }
+
+    public void deleteCompetition(Long id) {
+
+        Competition competition = competitionRepository.findById(id)
+                .orElseThrow(() -> new CompetitionNotFoundException(id));
+
+        competitionRepository.delete(competition);
+    }
+
 }
