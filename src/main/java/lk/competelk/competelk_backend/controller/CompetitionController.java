@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import lk.competelk.competelk_backend.dto.CreateCompetitionRequest;
 import java.util.List;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/competitions")
@@ -24,8 +26,16 @@ public class CompetitionController {
     public List<Competition> getAllCompetitions() {
         return competitionService.getAllCompetitions();
     }
+
+    @GetMapping("/{id}")///api/competitions/1 here id=1
+    public Competition getCompetitionById(@PathVariable Long id) {
+        return competitionService.getCompetitionById(id);
+    }
+
     @PostMapping
-    public Competition createCompetition(@RequestBody CreateCompetitionRequest request) {
+    public Competition createCompetition(
+            @Valid @RequestBody CreateCompetitionRequest request) { //After converting the JSON into CreateCompetitionRequest, validate that object using the validation rules written on its fields.
+
         return competitionService.createCompetition(request);
     }
 }

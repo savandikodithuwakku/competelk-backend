@@ -4,7 +4,7 @@ import lk.competelk.competelk_backend.entity.Competition;
 import lk.competelk.competelk_backend.repository.CompetitionRepository;
 import org.springframework.stereotype.Service;
 import lk.competelk.competelk_backend.dto.CreateCompetitionRequest;
-
+import lk.competelk.competelk_backend.exception.CompetitionNotFoundException;
 import java.util.List;
 
 @Service
@@ -29,5 +29,9 @@ public class CompetitionService {
         competition.setDeadline(request.getDeadline());
 
         return competitionRepository.save(competition);
+    }
+    public Competition getCompetitionById(Long id) {
+        return competitionRepository.findById(id)
+                .orElseThrow(() -> new CompetitionNotFoundException(id));
     }
 }
