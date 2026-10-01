@@ -23,6 +23,11 @@ public class CompetitionService {
                 .map(this::mapToResponse)//convert each Competition into CompetitionResponse
                 .toList();//collect the converted objects to a new list <CompetitionResponse>
     }
+    //    [
+    //    CompetitionResponse #1,
+    //    CompetitionResponse #2,
+    //    CompetitionResponse #3
+    //            ]
 
     public CompetitionResponse createCompetition(CreateCompetitionRequest request) {
 

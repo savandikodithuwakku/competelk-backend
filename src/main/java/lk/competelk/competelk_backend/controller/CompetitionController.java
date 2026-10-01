@@ -13,6 +13,7 @@ import java.util.List;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PathVariable;
 import lk.competelk.competelk_backend.dto.CompetitionResponse;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/competitions")
@@ -25,7 +26,7 @@ public class CompetitionController {
     }
 
     @GetMapping
-    public List<CompetitionResponse> getAllCompetitions() {
+    public List<CompetitionResponse> getAllCompetitions() { //A List means we can hold multiple CompetitionResponse objects
         return competitionService.getAllCompetitions();
     }
 
@@ -42,8 +43,11 @@ public class CompetitionController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCompetition(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCompetition(@PathVariable Long id) { //This method returns an HTTP response represented by ResponseEntity
+
         competitionService.deleteCompetition(id);
+
+        return ResponseEntity.noContent().build(); //set HTTP status to 204 No Content and build the ResponseEntity
     }
 
     @PutMapping("/{id}")
