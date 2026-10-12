@@ -27,4 +27,19 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(errorResponse);
     }
+
+    @ExceptionHandler(CompetitionSeriesNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleSeriesNotFound(
+            CompetitionSeriesNotFoundException exception) {
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                exception.getMessage(),
+                OffsetDateTime.now().toString()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(errorResponse);
+    }
 }
