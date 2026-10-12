@@ -42,4 +42,18 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(errorResponse);
     }
+    @ExceptionHandler(CompetitionEditionNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEditionNotFound(
+            CompetitionEditionNotFoundException exception) {
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.NOT_FOUND.value(),
+                exception.getMessage(),
+                OffsetDateTime.now().toString()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(errorResponse);
+    }
 }
